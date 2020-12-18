@@ -24,6 +24,20 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Test with pytest
+    - name: coveralls
+      if: steps.should_run.outputs.result
       run: |
-        pytest
+        coverage run \
+          --parallel-mode \
+          manage.py test \
+          -v 2 \
+          --tag=db_required \
+          --keepdb
+    - name: Coveralls Report
+      if: steps.should_run.outputs.result
+      run: |
+        coverage combine
+    - name: Coveralls
+      uses: AndreMiras/coveralls-python-action@develop
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}    
