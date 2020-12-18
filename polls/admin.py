@@ -19,6 +19,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
     search_fields = ['question_text']
     list_per_page = 10
+    # trigger coveralls
 
 
 # Register your models here.

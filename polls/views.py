@@ -26,7 +26,7 @@ def detail(request: HttpRequest, question_id: int) -> HttpResponse:
     # Note: There’s also a get_list_or_404() function,
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
-    # trigger coveralls
+# trigger coveralls
 
 
 def vote(request: HttpRequest, question_id: int) -> HttpResponse:
